@@ -11,8 +11,6 @@ class ProductModel
 
     public function findAllProducts()
     {
-//        $this->db->query('SELECT * FROM `product`');
-//        return $this->db->resultSet();
         $this->db->query('SELECT p.id, p.position, p.url, p.name, 
         p.articul, p.price, p.price_old, p.content, pt.name AS type_name,
         ps.name as section_name FROM product AS p
@@ -56,33 +54,6 @@ class ProductModel
         INNER JOIN product_type AS pt ON  pt.id = pa.type_id
         WHERE pa.section_id = :section_id AND p.visible = 1');
         $this->db->bind(':section_id', $sectionId);
-        return $this->db->resultSet();
-    }
-
-    public function findFilteredProductsBySection($sectionId, $startPrice, $endPrice, $filters)
-    {
-        if ($startPrice == '') {
-            $startPrice = 0;
-        };
-        if ($endPrice == '') {
-            $endPrice = 1000000;
-        };
-        $filter = implode(',', $filters);
-        var_dump($filter);
-//        var_dump($startPrice);
-//        var_dump($endPrice);
-        var_dump($filters);
-        $this->db->query('SELECT p.id, p.position, p.url, p.name, 
-        p.articul, p.price, p.price_old, p.content FROM product AS p
-        INNER JOIN pivot_product_param_variant AS pppv ON p.id = pppv.product_id 
-        INNER JOIN product_assignment AS pa ON p.id = pa.product_id
-        INNER JOIN product_section AS ps ON  ps.id = pa.section_id
-        WHERE pa.section_id = :section_id AND p.visible = 1 
-        AND p.price > :start_price AND p.price < :end_price AND pppv.param_variant_id IN (:filter) GROUP BY p.id');
-        $this->db->bind(':section_id', $sectionId);
-        $this->db->bind(':start_price', $startPrice);
-        $this->db->bind(':end_price', $endPrice);
-        $this->db->bind(':filter', $filter);
         return $this->db->resultSet();
     }
 

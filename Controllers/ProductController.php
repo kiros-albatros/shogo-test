@@ -98,20 +98,7 @@ class ProductController extends Controller
 
     public function getProductsBySection($sectionId)
     {
-        if (isset($_GET['filter'])) {
-            $startPrice = $_GET['start-price'];
-            $endPrice = $_GET['end-price'];
-            $filters = [];
-            foreach ($_GET as $key => $value) {
-                if (gettype($key) == 'integer') {
-                    $filters[] = $value;
-                }
-            }
-            var_dump($filters);
-            $products = $this->productModel->findFilteredProductsBySection($sectionId, $startPrice, $endPrice, $filters);
-        } else {
-            $products = $this->productModel->findProductsBySection($sectionId);
-        }
+        $products = $this->productModel->findProductsBySection($sectionId);
         $sections = $this->sectionModel->findAllSections();
         $section = $this->sectionModel->findSection($sectionId);
         $sectionParams = $this->sectionModel->getSectionParams($sectionId);
