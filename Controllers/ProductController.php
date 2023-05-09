@@ -28,15 +28,14 @@ class ProductController extends Controller
     }
 
     public function saveProductImage($file){
-        $srcFileName = $file['name'];
-        $pathInDb = '';
-        $newFilePath = 'images/' . $srcFileName;
+        if (!move_uploaded_file($file['tmp_name'], 'images/' . $file['name'])) {
+            var_dump('Не удалось сохранить файл');
+        }
     }
 
     public function addProduct()
     {
         if (isset($_POST['name']) && isset($_POST['articul']) && !empty($_FILES['url'])) {
-            //    var_dump($_POST);
             $data['name'] = trim(htmlspecialchars($_POST['name']));
             $data['articul'] = trim(htmlspecialchars($_POST['articul']));
             $data['position'] = trim(htmlspecialchars($_POST['position']));
@@ -47,14 +46,16 @@ class ProductController extends Controller
             $data['visible'] = trim(htmlspecialchars($_POST['visible']));
             $data['section'] = trim(htmlspecialchars($_POST['section']));
             $data['type'] = trim(htmlspecialchars($_POST['type']));
+            $data['url'] = trim(htmlspecialchars($_FILES['url']['name']));
             $id = $this->productModel->addProduct($data);
 
             if ($id) {
                 foreach ($_POST['variants'] as $variant) {
                     $this->productModel->addProductVariants($id, $variant);
                 }
-
                 $this->saveProductImage($_FILES['url']);
+                $path = 'Location:' . URLROOT . '/table';
+                header($path);
             }
         }
         //   $path = 'Location:' . URLROOT . '/table';

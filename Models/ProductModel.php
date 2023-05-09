@@ -105,7 +105,7 @@ class ProductModel
         $this->db->bind(":notice", $data['notice']);
         $this->db->bind(":content", $data['content']);
         $this->db->bind(":currency_id", 1);
-        $this->db->bind(":url", $data['name']);
+        $this->db->bind(":url", $data['url']);
         $this->db->bind(":visible", $data['visible']);
         if ($this->db->execute()) {
             $productId = $this->db->pdo->lastInsertId();

@@ -31,85 +31,34 @@
                         <?php    }
                         }
                         ?>
-                        <li><a class="dropdown-item" href="#"> Dropdown item 2 » </a>
-                            <ul class="submenu dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Submenu item 1</a></li>
-                                <li><a class="dropdown-item" href="#">Submenu item 2</a></li>
-                                <li><a class="dropdown-item" href="#">Submenu item 3 » </a>
-                                    <ul class="submenu dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Multi level 1</a></li>
-                                        <li><a class="dropdown-item" href="#">Multi level 2</a></li>
-                                    </ul>
-                                </li>
-                                <li><a class="dropdown-item" href="#">Submenu item 4</a></li>
-                                <li><a class="dropdown-item" href="#">Submenu item 5</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="dropdown-item" href="#"> Dropdown item 3 </a></li>
-                        <li><a class="dropdown-item" href="#"> Dropdown item 4 </a>
-                        </li></ul>
+                  </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= URLROOT; ?>/table">Таблица товаров</a>
                 </li>
+                <?php if (isset($_SESSION['user_id'])) {?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= URLROOT; ?>/add">Добавить товар</a>
                 </li>
-                <?php if (isset($_SESSION['user_id'])) { ?>
-                    <?php if ($_SESSION['user_role'] == 'admin') { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= URLROOT; ?>/user">Пользователи</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= URLROOT; ?>/admin/files">Файлы</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= URLROOT; ?>/admin/directories">Папки</a>
-                        </li>
-                    <?php } else { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= URLROOT; ?>/file">Ваши файлы</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= URLROOT; ?>/directory">Ваши папки</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= URLROOT; ?>/files/shared">Доступные файлы</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Добавить
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href="<?= URLROOT; ?>/file/add">Добавить файл</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="<?= URLROOT; ?>/directory/add">Добавить папку</a>
-                                </li>
-                            </ul>
-                        </li>
-                    <?php } ?>
-                <?php }; ?>
+                <?php } ?>
             </ul>
 
             <ul class="navbar-nav ml-auto">
                 <?php if (isset($_SESSION['user_id'])) : ?>
                     <li class="nav-item">
-                        <span class="nav-link">Добро пожаловать,
-                            <a href="<?= URLROOT; ?>/users/<?= $_SESSION['user_id']; ?>"><?= $_SESSION['user_email']; ?></a>
+                        <span class="nav-link">Добро пожаловать, <?= $_SESSION['user_name']; ?></a>
                         </span>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo URLROOT; ?>/user/logout">Выйти</a>
+                        <a class="nav-link" href="<?php echo URLROOT; ?>/logout">Выйти</a>
                     </li>
                 <?php else : ?>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo URLROOT; ?>/user/register">Регистрация</a>
+                        <a class="nav-link" href="<?php echo URLROOT; ?>/register">Регистрация</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo URLROOT; ?>/user/login">Войти</a>
+                        <a class="nav-link" href="<?php echo URLROOT; ?>/login">Войти</a>
                     </li>
                 <?php endif; ?>
             </ul>

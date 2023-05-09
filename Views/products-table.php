@@ -1,6 +1,6 @@
 <?php
 include_once 'partial/header.php'; ?>
-    <h3 class="mb-5 text-center">Товары со всеми их данными</h3>
+    <h3 class="mb-5 text-center">Таблица товаров</h3>
 
     <table class="table table-striped table-bordered">
         <thead>

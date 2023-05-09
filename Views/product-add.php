@@ -1,7 +1,7 @@
 <?php
 include_once 'partial/header.php'; ?>
     <h3 class="mb-5 text-center">Добавление товара</h3>
-    <form class="row g-3" method="POST" action="<?=URLROOT?>/add">
+    <form class="row g-3" method="POST" enctype="multipart/form-data" action="<?=URLROOT?>/add">
         <div class="col-md-6">
             <label for="name" class="form-label">Название</label>
             <input type="text" name="name" class="form-control" required>
@@ -13,6 +13,7 @@ include_once 'partial/header.php'; ?>
         <div class="col-md-6">
             <label for="section" class="form-label">Раздел</label>
         <select class="form-select section-select" name="section" aria-label="Default select example">
+            <option value="100" selected>Выберите раздел</option>
             <?php
             foreach ($data['sections'] as $section) { ?>
                 <option value="<?=$section['id']?>"><?=$section['name']?></option>
@@ -41,6 +42,7 @@ include_once 'partial/header.php'; ?>
             <div class="col-md-6">
                 <label for="inputPassword4" class="form-label">Тип</label>
                 <select class="form-select" name="type" aria-label="Default select example">
+                    <option value="100">Выберите тип</option>
                     <?php
                     foreach ($data['types'] as $type) { ?>
                         <option value="<?=$type['id']?>"><?=$type['name']?></option>
